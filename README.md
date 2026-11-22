@@ -25,7 +25,7 @@ Les thèmes s'affichent dans l'app desktop et mobile ; le terminal ne les dessin
 À l'invite d'une session Claude Code dans un terminal :
 
 ```
-/plugin install mes-themes --marketplace elalamiz605-tech/mes-themes
+/plugin install mes-themes --marketplace elalamiz605-tech/mes-themes-
 ```
 
 Réponds `y` pour ajouter le marketplace, puis choisis la portée « user » pour l'avoir dans toutes tes sessions.
@@ -33,9 +33,9 @@ Réponds `y` pour ajouter le marketplace, puis choisis la portée « user » pou
 Depuis un shell :
 
 ```bash
-claude plugin install mes-themes --marketplace elalamiz605-tech/mes-themes
+claude plugin install mes-themes --marketplace elalamiz605-tech/mes-themes-
 ```
 
-Dans l'app desktop, où `/plugin` ne marche pas : clique sur **+** à côté de la zone de saisie, puis **Plugins**, **Add marketplace** avec `elalamiz605-tech/mes-themes`, puis **Add plugin**.
+Dans l'app desktop, où `/plugin` ne marche pas : clique sur **+** à côté de la zone de saisie, puis **Plugins**, **Add marketplace** avec `elalamiz605-tech/mes-themes-`, puis **Add plugin**.
 
 Le dépôt est privé : l'ordinateur qui installe doit avoir un accès git à GitHub (une clé SSH, ou `gh auth login` puis `gh auth setup-git`).
