@@ -1,0 +1,5 @@
+{
+  "name": "mes-themes",
+  "owner": { "name": "elalamiz605-tech" },
+  "plugins": [{ "name": "mes-themes", "source": "./" }]
+}
