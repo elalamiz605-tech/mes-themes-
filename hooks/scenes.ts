@@ -289,7 +289,191 @@ const ORBITE = `${HEAD}
 </svg>
 </svg>`
 
+// ---------- Scènes générées : géométrie 3D abstraite ----------
+
+const r = (n: number) => Math.round(n * 10) / 10
+
+// Strates : panneaux extrudés superposés, bords néon cyan et magenta, qui flottent
+// à trois profondeurs (les plus proches bougent plus : effet de parallaxe).
+function strates(): string {
+  // [x, y, largeur, hauteur, profondeur 1 à 3]
+  const panels: [number, number, number, number, number][] = [
+    [60, 40, 420, 300, 1], [1080, 30, 470, 260, 1], [-40, 620, 380, 420, 1], [1220, 640, 420, 380, 1],
+    [220, 180, 360, 380, 2], [980, 220, 380, 330, 2], [520, 700, 520, 300, 2], [700, -40, 360, 230, 2],
+    [120, 420, 300, 260, 3], [1180, 430, 300, 250, 3], [420, 60, 240, 170, 3], [930, 760, 250, 200, 3],
+  ]
+  const face = panels
+    .map(([x, y, w, h, d]) => {
+      const ext = 6 + d * 5
+      return `<g class="l${d}">
+<rect x="${x + ext + 10}" y="${y + ext + 14}" width="${w}" height="${h}" class="sh"/>
+<polygon class="side" points="${x + w},${y} ${x + w + ext},${y + ext} ${x + w + ext},${y + h + ext} ${x + w},${y + h}"/>
+<polygon class="bot" points="${x},${y + h} ${x + w},${y + h} ${x + w + ext},${y + h + ext} ${x + ext},${y + h + ext}"/>
+<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#f${d})"/>
+<rect x="${x}" y="${y}" width="${w}" height="${h}" class="rim"/>
+</g>`
+    })
+    .join('\n')
+
+  return `${HEAD}
+<style>
+.sh{fill:#02030c;opacity:.45}
+.side{fill:#0a1650}.bot{fill:#140a3a}
+.rim{fill:none;stroke:url(#edge);stroke-width:2;opacity:.9}
+.l1{animation:fa 26s ease-in-out infinite alternate}
+.l2{animation:fb 21s ease-in-out infinite alternate}
+.l3{animation:fc 17s ease-in-out infinite alternate}
+@keyframes fa{from{transform:translate(0,0)}to{transform:translate(6px,-8px)}}
+@keyframes fb{from{transform:translate(0,0)}to{transform:translate(-12px,-16px)}}
+@keyframes fc{from{transform:translate(0,0)}to{transform:translate(18px,-26px)}}
+.gm{animation:gm 14s ease-in-out infinite alternate}
+.gc{animation:gc 18s ease-in-out infinite alternate}
+@keyframes gm{from{transform:translate(0,0);opacity:.55}to{transform:translate(140px,-60px);opacity:.8}}
+@keyframes gc{from{transform:translate(0,0);opacity:.5}to{transform:translate(-160px,80px);opacity:.75}}
+</style>
+<defs>
+<linearGradient id="bg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3a0a3f"/><stop offset=".5" stop-color="#0e1240"/><stop offset="1" stop-color="#0b3a6e"/></linearGradient>
+<radialGradient id="mg"><stop offset="0" stop-color="#ff2fb3" stop-opacity=".7"/><stop offset="1" stop-color="#ff2fb3" stop-opacity="0"/></radialGradient>
+<radialGradient id="cy"><stop offset="0" stop-color="#22d3ff" stop-opacity=".6"/><stop offset="1" stop-color="#22d3ff" stop-opacity="0"/></radialGradient>
+<linearGradient id="edge" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff2fb3"/><stop offset=".5" stop-color="#6a5cff"/><stop offset="1" stop-color="#2ee8ff"/></linearGradient>
+<linearGradient id="f1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b3c9e"/><stop offset="1" stop-color="#0c1a5c"/></linearGradient>
+<linearGradient id="f2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2248b8"/><stop offset="1" stop-color="#10216e"/></linearGradient>
+<linearGradient id="f3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a56cc"/><stop offset="1" stop-color="#132a82"/></linearGradient>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+<circle class="gm" cx="250" cy="850" r="480" fill="url(#mg)"/>
+<circle class="gc" cx="1380" cy="160" r="460" fill="url(#cy)"/>
+${face}
+</svg>`
+}
+
+// Soie : rubans violets et magenta qui ondulent lentement, comme un tissu au vent.
+function soie(): string {
+  const ribbon = (dy: number, grad: string, cls: string) =>
+    `<path class="${cls}" fill="url(#${grad})" d="M-300 ${500 + dy} C100 ${280 + dy} 500 ${720 + dy} 900 ${470 + dy} C1300 ${220 + dy} 1600 ${360 + dy} 1900 ${300 + dy} L1900 ${420 + dy} C1600 ${500 + dy} 1300 ${380 + dy} 900 ${610 + dy} C500 ${840 + dy} 100 ${420 + dy} -300 ${650 + dy} Z"/>`
+  const shine = (dy: number, cls: string) =>
+    `<path class="hl ${cls}" d="M-300 ${560 + dy} C100 ${350 + dy} 500 ${780 + dy} 900 ${535 + dy} C1300 ${290 + dy} 1600 ${420 + dy} 1900 ${360 + dy}"/>`
+
+  return `${HEAD}
+<style>
+.r1{animation:w1 22s ease-in-out infinite alternate;opacity:.85}
+.r2{animation:w2 28s ease-in-out infinite alternate;opacity:.75}
+.r3{animation:w3 34s ease-in-out infinite alternate;opacity:.65}
+.r4{animation:w1 30s ease-in-out infinite alternate-reverse;opacity:.5}
+@keyframes w1{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(-180px,30px) rotate(3deg)}}
+@keyframes w2{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(160px,-40px) rotate(-4deg)}}
+@keyframes w3{from{transform:translate(-60px,20px) rotate(2deg)}to{transform:translate(120px,-30px) rotate(-2deg)}}
+.r1,.r2,.r3,.r4{transform-box:view-box;transform-origin:800px 500px}
+.hl{fill:none;stroke:#f4d9ff;stroke-width:3;opacity:.35;stroke-linecap:round}
+</style>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0420"/><stop offset="1" stop-color="#1d0838"/></linearGradient>
+<linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b0f7a"/><stop offset=".45" stop-color="#9b3dff"/><stop offset=".7" stop-color="#e06bff"/><stop offset="1" stop-color="#4b1499"/></linearGradient>
+<linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff4fb8"/><stop offset=".5" stop-color="#7a2bd9"/><stop offset="1" stop-color="#2a0c5c"/></linearGradient>
+<linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a1a8f"/><stop offset=".55" stop-color="#5a6bff"/><stop offset="1" stop-color="#b78bff"/></linearGradient>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+<g class="r4">${ribbon(-320, 'g3', '')}</g>
+<g class="r3">${ribbon(260, 'g2', '')}</g>
+<g class="r2">${ribbon(-120, 'g3', '')}${shine(-120, '')}</g>
+<g class="r1">${ribbon(80, 'g1', '')}${shine(80, '')}</g>
+</svg>`
+}
+
+// Cristal : un sol de facettes pastel et des cubes isométriques qui flottent,
+// avec une lumière qui balaie lentement la scène (version claire).
+function cristal(): string {
+  const cube = (cx: number, cy: number, s: number, cls: string) => {
+    const k = 0.866 * s
+    return `<g class="cb ${cls}">
+<polygon fill="#fbe9f0" points="${r(cx)},${r(cy - s)} ${r(cx + k)},${r(cy - s / 2)} ${r(cx)},${r(cy)} ${r(cx - k)},${r(cy - s / 2)}"/>
+<polygon fill="#e7a9c0" points="${r(cx - k)},${r(cy - s / 2)} ${r(cx)},${r(cy)} ${r(cx)},${r(cy + s)} ${r(cx - k)},${r(cy + s / 2)}"/>
+<polygon fill="#9db8e6" points="${r(cx)},${r(cy)} ${r(cx + k)},${r(cy - s / 2)} ${r(cx + k)},${r(cy + s / 2)} ${r(cx)},${r(cy + s)}"/>
+</g>`
+  }
+  // Facettes : une grille de triangles avec des teintes rose, mauve et bleu pâle.
+  const tones = ['#f3d6e0', '#eccad7', '#e3bfd0', '#dcc6e2', '#d3d7ef', '#e8d0dc', '#f6e2ea', '#d8cbe6']
+  const tri: string[] = []
+  const cols = 9
+  const rows = 6
+  const cw = 1600 / cols
+  const rh = 1000 / rows
+  // Décalage pseudo-aléatoire fixe des sommets, pour un rendu « low poly ».
+  const jit = (i: number, j: number): [number, number] => [((i * 37 + j * 91) % 41) - 20, ((i * 53 + j * 29) % 37) - 18]
+  const pt = (i: number, j: number) => {
+    const [jx, jy] = i === 0 || i === cols || j === 0 || j === rows ? [0, 0] : jit(i, j)
+    return `${r(i * cw + jx)},${r(j * rh + jy)}`
+  }
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      const t1 = tones[(i * 3 + j * 5) % tones.length]
+      const t2 = tones[(i * 5 + j * 3 + 2) % tones.length]
+      tri.push(`<polygon fill="${t1}" stroke="${t1}" stroke-width="1.5" points="${pt(i, j)} ${pt(i + 1, j)} ${pt(i, j + 1)}"/>`)
+      tri.push(`<polygon fill="${t2}" stroke="${t2}" stroke-width="1.5" points="${pt(i + 1, j)} ${pt(i + 1, j + 1)} ${pt(i, j + 1)}"/>`)
+    }
+  }
+
+  return `${HEAD}
+<style>
+.cb{animation:bob 16s ease-in-out infinite alternate}
+.c2{animation-duration:20s;animation-delay:-6s}.c3{animation-duration:13s;animation-delay:-3s}
+.c4{animation-duration:23s;animation-delay:-9s}.c5{animation-duration:18s;animation-delay:-12s}
+@keyframes bob{from{transform:translate(0,0)}to{transform:translate(10px,-34px)}}
+.lt{animation:sweep 24s ease-in-out infinite alternate}
+@keyframes sweep{from{transform:translate(-500px,0)}to{transform:translate(700px,0)}}
+.cs{fill:#7a3a5a;opacity:.12}
+</style>
+<defs><radialGradient id="lt"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs>
+${tri.join('\n')}
+<ellipse class="lt" cx="500" cy="380" rx="520" ry="420" fill="url(#lt)"/>
+<ellipse class="cs" cx="210" cy="930" rx="90" ry="18"/>
+<ellipse class="cs" cx="1420" cy="900" rx="110" ry="20"/>
+${cube(210, 760, 90, 'c1')}
+${cube(1420, 720, 110, 'c2')}
+${cube(1300, 170, 60, 'c3')}
+${cube(150, 180, 50, 'c4')}
+${cube(1500, 420, 40, 'c5')}
+</svg>`
+}
+
+// Chrome : ondulations métalliques concentriques sur un plan en perspective,
+// avec une onde qui part du centre et se propage vers l'extérieur.
+function chrome(): string {
+  const rings: string[] = []
+  const n = 26
+  for (let i = 0; i < n; i++) {
+    const rx = 40 + i * 46
+    const tone = i % 2 === 0 ? 'hi' : 'lo'
+    rings.push(
+      `<ellipse class="rg ${tone}" style="animation-delay:${r(-12 + i * 0.35)}s" cx="1180" cy="780" rx="${rx}" ry="${r(rx * 0.32)}"/>`,
+    )
+  }
+
+  return `${HEAD}
+<style>
+.rg{fill:none;transform-box:view-box;transform-origin:1180px 780px;animation:rip 12s ease-in-out infinite}
+.hi{stroke:url(#metal);stroke-width:7}
+.lo{stroke:#07080a;stroke-width:9;opacity:.9}
+@keyframes rip{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+.sh{animation:shine 20s ease-in-out infinite alternate}
+@keyframes shine{from{transform:translate(-200px,0);opacity:.25}to{transform:translate(300px,-60px);opacity:.45}}
+</style>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050608"/><stop offset="1" stop-color="#14171c"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2f36"/><stop offset=".35" stop-color="#d9dee6"/><stop offset=".5" stop-color="#7b838f"/><stop offset=".7" stop-color="#f2f5f9"/><stop offset="1" stop-color="#3a3f47"/></linearGradient>
+<radialGradient id="sh"><stop offset="0" stop-color="#cfe3ff" stop-opacity=".5"/><stop offset="1" stop-color="#cfe3ff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/>
+${rings.join('\n')}
+<ellipse class="sh" cx="1100" cy="520" rx="420" ry="200" fill="url(#sh)"/>
+</svg>`
+}
+
 export const SCENES: Record<string, { svg: string; alt: string }> = {
+  strates: { svg: strates(), alt: 'Des panneaux bleus superposés aux bords néon qui flottent en profondeur' },
+  soie: { svg: soie(), alt: 'Des rubans de soie violets et magenta qui ondulent' },
+  cristal: { svg: cristal(), alt: 'Des facettes pastel et des cubes en relief qui flottent sous une lumière douce' },
+  chrome: { svg: chrome(), alt: 'Des ondulations de métal chromé qui se propagent' },
   hologramme: { svg: HOLOGRAMME, alt: 'Un globe holographique en fil de fer qui tourne au-dessus d’un socle lumineux' },
   hyperespace: { svg: HYPERESPACE, alt: 'Un tunnel d’anneaux lumineux et des traînées d’étoiles qui filent vers l’avant' },
   orbite: { svg: ORBITE, alt: 'Des planètes en relief qui tournent sur des orbites inclinées autour d’une étoile' },

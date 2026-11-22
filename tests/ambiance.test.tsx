@@ -57,7 +57,7 @@ test('les thèmes futuristes se choisissent et se dessinent', async ($, on) => {
 
     return { value: { isDrawn: true, requestId: 'r' } }
   })
-  for (const id of ['hologramme', 'hyperespace', 'orbite']) {
+  for (const id of ['hologramme', 'hyperespace', 'orbite', 'strates', 'soie', 'cristal', 'chrome']) {
     const done = await $.command.run({ ...RUN, args: id })
     expect(done.text).toContain('activée')
     expect(JSON.stringify(sets.at(-1))).toContain(`"scene":"${id}"`)

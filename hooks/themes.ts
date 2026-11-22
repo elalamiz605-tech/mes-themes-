@@ -377,7 +377,230 @@ const orbiteStyle: ThemeStyle = {
   ToolUse: { backgroundColor: '#120e20', color: '#aa9fc0', radius: 12, paddingX: 10, paddingY: 3 },
 }
 
+// ---------- Strates (sombre) ----------
+const strates = makeColors({
+  label: 'Strates',
+  only: 'dark',
+  roles: { accent: '#3fa9ff', danger: '#ff4d6d', success: '#39e6a5', warning: '#ffc94d', pro: '#ff3fb4' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#060a1e',
+        'surface-1': '#0b1230',
+        'surface-2': '#0f173b',
+        'surface-3': '#131c44',
+        'text-primary': '#eaf0ff',
+        'text-secondary': '#bcc8ec',
+        'text-muted': '#93a2cf',
+      },
+    },
+  },
+})
+
+const stratesStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 24 },
+  Heading: { fontWeight: 'bold', letterSpacing: 0.5, color: '#7fd8ff' },
+  UserMessage: {
+    backgroundColor: '#14216b',
+    color: '#eaf0ff',
+    radius: 4,
+    paddingX: 16,
+    paddingY: 11,
+    borderColor: '#ff3fb4',
+    borderWidth: 1,
+    shadow: { x: 6, y: 8, blur: 0, color: '#04061a' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#0b1236',
+    color: '#eaf0ff',
+    radius: 4,
+    paddingX: 16,
+    paddingY: 12,
+    borderColor: '#2ee8ff',
+    borderWidth: 1,
+    shadow: { x: 6, y: 8, blur: 0, color: '#04061a' },
+  },
+  ToolUse: { backgroundColor: '#0c1438', color: '#93a2cf', radius: 3, paddingX: 8, paddingY: 3 },
+}
+
+// ---------- Soie (sombre) ----------
+const soie = makeColors({
+  label: 'Soie',
+  only: 'dark',
+  roles: { accent: '#c86bff', danger: '#ff5c86', success: '#4fe0b0', warning: '#ffcc66', pro: '#7a8bff' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#0c0420',
+        'surface-1': '#140a2c',
+        'surface-2': '#1a0f35',
+        'surface-3': '#1e123c',
+        'text-primary': '#f6eeff',
+        'text-secondary': '#d6c6ee',
+        'text-muted': '#ad9bcb',
+      },
+    },
+  },
+})
+
+const soieStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 25 },
+  Heading: { fontFamily: ['serif'], fontWeight: 'semibold', italic: true, color: '#e3b8ff' },
+  UserMessage: {
+    backgroundColor: '#3a1670',
+    color: '#f6eeff',
+    radius: [28, 28, 8, 28],
+    paddingX: 18,
+    paddingY: 11,
+    shadow: { y: 6, blur: 22, color: '#9b3dff55' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#160b2e',
+    color: '#f6eeff',
+    radius: [28, 28, 28, 8],
+    paddingX: 18,
+    paddingY: 13,
+    borderColor: '#3b2266',
+    borderWidth: 1,
+  },
+  ToolUse: { backgroundColor: '#170c30', color: '#ad9bcb', radius: 14, paddingX: 10, paddingY: 3 },
+}
+
+// ---------- Cristal (clair) ----------
+const cristal = makeColors({
+  label: 'Cristal',
+  only: 'light',
+  roles: { accent: '#c2366e', danger: '#c4302b', success: '#2f8a5c', warning: '#b07a12', pro: '#5a6cc4' },
+  light: {
+    gray: {
+      anchors: {
+        'surface-0': '#ecdde4',
+        'surface-1': '#f3e8ed',
+        'surface-2': '#faf4f7',
+        'text-primary': '#2a1620',
+        'text-secondary': '#4f3442',
+        'text-muted': '#6b5060',
+      },
+    },
+  },
+})
+
+const cristalStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 24 },
+  Heading: { fontWeight: 'bold', color: '#9c2a58' },
+  UserMessage: {
+    backgroundColor: '#f7d4e1',
+    color: '#2a1620',
+    radius: 6,
+    paddingX: 16,
+    paddingY: 11,
+    shadow: { x: 5, y: 6, blur: 0, color: '#b9c9ec' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#fdf8fa',
+    color: '#2a1620',
+    radius: 6,
+    paddingX: 16,
+    paddingY: 12,
+    shadow: { x: 5, y: 6, blur: 0, color: '#e6b3c6' },
+  },
+  ToolUse: { backgroundColor: '#f6edf1', color: '#4f3442', radius: 4, paddingX: 8, paddingY: 3 },
+}
+
+// ---------- Chrome (sombre) ----------
+const chrome = makeColors({
+  label: 'Chrome',
+  only: 'dark',
+  roles: { accent: '#8fb3d9', danger: '#ff6a5c', success: '#5fd49a', warning: '#e8c15a', pro: '#b49cf0' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#08090b',
+        'surface-1': '#0f1114',
+        'surface-2': '#14171b',
+        'surface-3': '#181b20',
+        'text-primary': '#f2f4f7',
+        'text-secondary': '#c6ccd4',
+        'text-muted': '#9aa2ad',
+      },
+    },
+  },
+})
+
+const chromeStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 24, letterSpacing: 0.2 },
+  Heading: { fontWeight: 'semibold', letterSpacing: 2, color: '#dfe5ee' },
+  UserMessage: {
+    backgroundColor: '#1c2026',
+    color: '#f2f4f7',
+    radius: 12,
+    paddingX: 16,
+    paddingY: 10,
+    borderColor: '#9aa6b5',
+    borderWidth: 1,
+    shadow: { y: 4, blur: 14, color: '#00000088' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#111317',
+    color: '#f2f4f7',
+    radius: 12,
+    paddingX: 16,
+    paddingY: 12,
+    borderColor: '#2c3138',
+    borderWidth: 1,
+  },
+  ToolUse: { backgroundColor: '#121418', color: '#9aa2ad', radius: 8, paddingX: 10, paddingY: 3 },
+}
+
 export const LOOKS: Look[] = [
+  {
+    id: 'strates',
+    name: 'Strates',
+    description: 'panneaux bleus en relief, bords néon cyan et magenta (sombre)',
+    problems: strates.problems,
+    args: {
+      colors: strates.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'strates', glass: { blur: 16, tint: '#060a1e', opacity: 0.55 } },
+      style: stratesStyle,
+    },
+  },
+  {
+    id: 'soie',
+    name: 'Soie',
+    description: 'rubans violets et magenta qui ondulent (sombre)',
+    problems: soie.problems,
+    args: {
+      colors: soie.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'soie', glass: { blur: 18, tint: '#0c0420', opacity: 0.55 } },
+      style: soieStyle,
+    },
+  },
+  {
+    id: 'cristal',
+    name: 'Cristal',
+    description: 'facettes et cubes pastel en relief (clair)',
+    problems: cristal.problems,
+    args: {
+      colors: cristal.theme,
+      overrideColorScheme: 'light',
+      backdrop: { scene: 'cristal', glass: { blur: 16, tint: '#faf4f7', opacity: 0.6 } },
+      style: cristalStyle,
+    },
+  },
+  {
+    id: 'chrome',
+    name: 'Chrome',
+    description: 'ondulations de métal chromé (sombre)',
+    problems: chrome.problems,
+    args: {
+      colors: chrome.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'chrome', glass: { blur: 14, tint: '#08090b', opacity: 0.55 } },
+      style: chromeStyle,
+    },
+  },
   {
     id: 'hologramme',
     name: 'Hologramme',
