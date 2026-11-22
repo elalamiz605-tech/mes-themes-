@@ -17,7 +17,7 @@ function find(id: string) {
 
 function list(current: string | undefined): string {
   const lines = LOOKS.map(
-    look => `${look.id === current ? '●' : '○'} ${look.id.padEnd(9)} ${look.name}: ${look.description}`,
+    look => `${look.id === current ? '●' : '○'} ${look.id.padEnd(12)} ${look.name}: ${look.description}`,
   )
 
   return [
@@ -44,8 +44,8 @@ export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: 'ambiance',
-      description: 'Changer d’ambiance : ocean, couchant, foret, neon (ou off)',
-      argumentHint: '[ocean|couchant|foret|neon|off]',
+      description: 'Changer d’ambiance (sans argument : la liste)',
+      argumentHint: `[${LOOKS.map(look => look.id).join('|')}|off]`,
       immediate: true,
     })
 

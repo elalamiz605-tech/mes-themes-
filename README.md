@@ -1,10 +1,13 @@
 # mes-themes
 
-Quatre ambiances pour Claude dans l'app desktop et mobile : couleurs, fond animé et style des messages.
+Sept ambiances pour Claude dans l'app desktop et mobile : couleurs, fond animé et style des messages.
 
 | Nom | Ambiance |
 |---|---|
 | `neon` (par défaut) | nuit violette, rose et cyan électriques, grille en perspective (sombre) |
+| `hologramme` | globe 3D en fil de fer qui tourne, satellite en orbite, socle lumineux (sombre) |
+| `hyperespace` | tunnel d'anneaux et traînées d'étoiles qui filent vers toi (sombre) |
+| `orbite` | étoile et planètes en relief sur des orbites inclinées (sombre) |
 | `ocean` | bleus profonds et turquoise, vagues lentes |
 | `couchant` | orange, corail et violet chaud, soleil et nuages |
 | `foret` | verts mousse et crème, sapins et lucioles |
@@ -12,7 +15,7 @@ Quatre ambiances pour Claude dans l'app desktop et mobile : couleurs, fond anim�
 ## Utilisation
 
 - `/ambiance` : liste les ambiances
-- `/ambiance ocean` (ou `couchant`, `foret`, `neon`) : change d'ambiance ; le choix est mémorisé
+- `/ambiance hologramme` (ou `hyperespace`, `orbite`, `neon`, `ocean`, `couchant`, `foret`) : change d'ambiance ; le choix est mémorisé
 - `/ambiance off` : revient au look de base de Claude
 
 Les thèmes s'affichent dans l'app desktop et mobile ; le terminal ne les dessine pas.

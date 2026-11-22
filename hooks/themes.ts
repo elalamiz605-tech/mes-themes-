@@ -242,7 +242,178 @@ const neonStyle: ThemeStyle = {
   ToolUse: { backgroundColor: '#140b24', color: '#cdbbe8', radius: 2, paddingX: 8, paddingY: 3 },
 }
 
+// ---------- Hologramme (sombre) ----------
+const hologramme = makeColors({
+  label: 'Hologramme',
+  only: 'dark',
+  roles: { accent: '#2ee8ff', danger: '#ff5a6e', success: '#3dffb0', warning: '#ffd166', pro: '#ff6bdc' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#040a12',
+        'surface-1': '#08131f',
+        'surface-2': '#0c1a29',
+        'surface-3': '#0f1f31',
+        'text-primary': '#e4fbff',
+        'text-secondary': '#b3dfe8',
+        'text-muted': '#8bbcc8',
+      },
+    },
+  },
+})
+
+const hologrammeStyle: ThemeStyle = {
+  Text: { fontFamily: ['mono'], fontSize: 14, lineHeight: 22 },
+  Heading: { fontFamily: ['mono'], fontWeight: 'bold', letterSpacing: 2, color: '#7ff9ff' },
+  UserMessage: {
+    backgroundColor: '#0a2030',
+    color: '#e4fbff',
+    radius: [4, 14, 4, 14],
+    paddingX: 14,
+    paddingY: 10,
+    borderColor: '#2ee8ff',
+    borderWidth: 1,
+    shadow: { blur: 16, color: '#2ee8ff40' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#08131f',
+    color: '#e4fbff',
+    radius: [14, 4, 14, 4],
+    paddingX: 16,
+    paddingY: 12,
+    borderColor: '#1a5b70',
+    borderWidth: 1,
+  },
+  ToolUse: { backgroundColor: '#071521', color: '#8bbcc8', radius: 3, paddingX: 8, paddingY: 3 },
+}
+
+// ---------- Hyperespace (sombre) ----------
+const hyperespace = makeColors({
+  label: 'Hyperespace',
+  only: 'dark',
+  roles: { accent: '#8b7dff', danger: '#ff5c7a', success: '#4dffc3', warning: '#ffcf5c', pro: '#5ce1ff' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#03030b',
+        'surface-1': '#090a18',
+        'surface-2': '#0e1022',
+        'surface-3': '#12142a',
+        'text-primary': '#eeeeff',
+        'text-secondary': '#c3c5ea',
+        'text-muted': '#9b9dc8',
+      },
+    },
+  },
+})
+
+const hyperespaceStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 24, letterSpacing: 0.2 },
+  Heading: { fontWeight: 'semibold', letterSpacing: 1.5, color: '#b9b3ff' },
+  UserMessage: {
+    backgroundColor: '#1a1840',
+    color: '#eeeeff',
+    radius: 16,
+    paddingX: 16,
+    paddingY: 10,
+    borderColor: '#6a5cff',
+    borderWidth: 1,
+    shadow: { y: 4, blur: 20, color: '#6a5cff55' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#0b0c1c',
+    color: '#eeeeff',
+    radius: 16,
+    paddingX: 16,
+    paddingY: 12,
+    borderColor: '#2a2d5c',
+    borderWidth: 1,
+  },
+  ToolUse: { backgroundColor: '#0d0f22', color: '#9b9dc8', radius: 10, paddingX: 10, paddingY: 3 },
+}
+
+// ---------- Orbite (sombre) ----------
+const orbite = makeColors({
+  label: 'Orbite',
+  only: 'dark',
+  roles: { accent: '#ffa94d', danger: '#ff5f57', success: '#5fe39a', warning: '#ffd45c', pro: '#b79bff' },
+  dark: {
+    gray: {
+      anchors: {
+        'surface-0': '#07050f',
+        'surface-1': '#0e0b19',
+        'surface-2': '#141022',
+        'surface-3': '#181329',
+        'text-primary': '#f6efff',
+        'text-secondary': '#d3c8e6',
+        'text-muted': '#aa9fc0',
+      },
+    },
+  },
+})
+
+const orbiteStyle: ThemeStyle = {
+  Text: { fontFamily: ['sans'], fontSize: 15, lineHeight: 24 },
+  Heading: { fontWeight: 'bold', color: '#ffc37a' },
+  UserMessage: {
+    backgroundColor: '#2a1a12',
+    color: '#fff3e6',
+    radius: 24,
+    paddingX: 18,
+    paddingY: 11,
+    borderColor: '#ff9a3c',
+    borderWidth: 1,
+    shadow: { y: 3, blur: 18, color: '#ff9a3c44' },
+  },
+  AssistantMessage: {
+    backgroundColor: '#100c1c',
+    color: '#f6efff',
+    radius: 24,
+    paddingX: 18,
+    paddingY: 13,
+    borderColor: '#3a2d55',
+    borderWidth: 1,
+  },
+  ToolUse: { backgroundColor: '#120e20', color: '#aa9fc0', radius: 12, paddingX: 10, paddingY: 3 },
+}
+
 export const LOOKS: Look[] = [
+  {
+    id: 'hologramme',
+    name: 'Hologramme',
+    description: 'globe 3D en fil de fer qui tourne, cyan et magenta (sombre)',
+    problems: hologramme.problems,
+    args: {
+      colors: hologramme.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'hologramme', glass: { blur: 14, tint: '#040a12', opacity: 0.55 } },
+      style: hologrammeStyle,
+    },
+  },
+  {
+    id: 'hyperespace',
+    name: 'Hyperespace',
+    description: 'tunnel d’anneaux et étoiles qui filent vers toi (sombre)',
+    problems: hyperespace.problems,
+    args: {
+      colors: hyperespace.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'hyperespace', glass: { blur: 12, tint: '#03030b', opacity: 0.55 } },
+      style: hyperespaceStyle,
+    },
+  },
+  {
+    id: 'orbite',
+    name: 'Orbite',
+    description: 'planètes en relief sur des orbites inclinées (sombre)',
+    problems: orbite.problems,
+    args: {
+      colors: orbite.theme,
+      overrideColorScheme: 'dark',
+      backdrop: { scene: 'orbite', glass: { blur: 14, tint: '#07050f', opacity: 0.55 } },
+      style: orbiteStyle,
+    },
+  },
   {
     id: 'ocean',
     name: 'Océan',

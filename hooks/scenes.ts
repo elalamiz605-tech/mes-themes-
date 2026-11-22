@@ -132,7 +132,167 @@ const NEON = `${HEAD}
 </g>
 </svg>`
 
+// Hologramme : globe en fil de fer qui tourne sur lui-même (méridiens qui pivotent),
+// un satellite sur une orbite inclinée, une ligne de scan, et un socle qui pulse.
+const HOLOGRAMME = `${HEAD}
+<style>
+.bg{fill:#040a12}
+.fl{stroke:#1de9ff;stroke-width:1;opacity:.1;fill:none}
+.gl{fill:none;stroke:#3ff0ff;stroke-width:1.1;opacity:.55}
+.rim{fill:#0a2a3a;fill-opacity:.35;stroke:#5ff6ff;stroke-width:1.6;opacity:.8}
+.m{transform-box:fill-box;transform-origin:center;animation:mer 24s infinite}
+.m2{animation-delay:-4s}.m3{animation-delay:-8s}.m4{animation-delay:-12s}.m5{animation-delay:-16s}.m6{animation-delay:-20s}
+@keyframes mer{
+0%{transform:scaleX(1);animation-timing-function:ease-in}
+25%{transform:scaleX(0);animation-timing-function:ease-out}
+50%{transform:scaleX(-1);animation-timing-function:ease-in}
+75%{transform:scaleX(0);animation-timing-function:ease-out}
+100%{transform:scaleX(1)}}
+.orb{fill:none;stroke:#ff4fd8;stroke-width:1;opacity:.5}
+.spin{animation:spin 14s linear infinite}
+.sat{animation:sat 14s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes sat{
+0%{transform:rotate(0deg) scale(1);opacity:.9}
+25%{transform:rotate(-90deg) scale(1.4);opacity:1}
+50%{transform:rotate(-180deg) scale(1);opacity:.9}
+75%{transform:rotate(-270deg) scale(.6);opacity:.4}
+100%{transform:rotate(-360deg) scale(1);opacity:.9}}
+.satc{fill:#ff8be6}
+.scan{fill:#7ff9ff;opacity:.35;animation:scan 7s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateY(0)}to{transform:translateY(176px)}}
+.base{fill:none;stroke:#3ff0ff;stroke-width:1.2;transform-box:fill-box;transform-origin:center;animation:base 6s ease-out infinite}
+.b2{animation-delay:-2s}.b3{animation-delay:-4s}
+@keyframes base{from{transform:scale(.4);opacity:.7}to{transform:scale(1.3);opacity:0}}
+.beam{fill:#3ff0ff;opacity:.07}
+.pt{fill:#7ff9ff;opacity:.4;animation:rise 16s linear infinite}
+.p2{animation-delay:-5s}.p3{animation-delay:-10s}.p4{animation-delay:-13s}
+@keyframes rise{from{transform:translateY(0);opacity:0}20%{opacity:.5}to{transform:translateY(-420px);opacity:0}}
+</style>
+<defs><clipPath id="globe"><circle cx="250" cy="150" r="90"/></clipPath></defs>
+<rect class="bg" width="1600" height="1000"/>
+<g class="fl">
+<path d="M800 600 L-600 1000 M800 600 L-100 1000 M800 600 L350 1000 M800 600 L650 1000 M800 600 L950 1000 M800 600 L1250 1000 M800 600 L1700 1000 M800 600 L2200 1000"/>
+<path d="M0 640 H1600 M0 690 H1600 M0 750 H1600 M0 820 H1600 M0 900 H1600 M0 990 H1600"/>
+</g>
+<circle class="pt" cx="180" cy="900" r="2"/><circle class="pt p2" cx="520" cy="960" r="1.5"/>
+<circle class="pt p3" cx="1100" cy="920" r="2"/><circle class="pt p4" cx="1420" cy="980" r="1.5"/>
+<svg x="0" y="0" width="1600" height="1000" viewBox="0 0 420 420" preserveAspectRatio="xMaxYMin meet">
+<path class="beam" d="M200 268 L300 268 L290 150 L210 150 Z"/>
+<ellipse class="base" cx="250" cy="268" rx="70" ry="12"/>
+<ellipse class="base b2" cx="250" cy="268" rx="70" ry="12"/>
+<ellipse class="base b3" cx="250" cy="268" rx="70" ry="12"/>
+<circle class="rim" cx="250" cy="150" r="90"/>
+<ellipse class="gl" cx="250" cy="150" rx="90" ry="14"/>
+<ellipse class="gl" cx="250" cy="105" rx="78" ry="12"/>
+<ellipse class="gl" cx="250" cy="195" rx="78" ry="12"/>
+<ellipse class="gl" cx="250" cy="72" rx="45" ry="7"/>
+<ellipse class="gl" cx="250" cy="228" rx="45" ry="7"/>
+<ellipse class="gl m" cx="250" cy="150" rx="90" ry="90"/>
+<ellipse class="gl m m2" cx="250" cy="150" rx="90" ry="90"/>
+<ellipse class="gl m m3" cx="250" cy="150" rx="90" ry="90"/>
+<ellipse class="gl m m4" cx="250" cy="150" rx="90" ry="90"/>
+<ellipse class="gl m m5" cx="250" cy="150" rx="90" ry="90"/>
+<ellipse class="gl m m6" cx="250" cy="150" rx="90" ry="90"/>
+<g clip-path="url(#globe)"><rect class="scan" x="150" y="62" width="200" height="2"/></g>
+<g transform="translate(250 150) rotate(-18) scale(1 .3)">
+<circle class="orb" cx="0" cy="0" r="135"/>
+<g class="spin"><g transform="translate(135 0)"><g class="sat"><g transform="scale(1 3.33)"><circle class="satc" r="4"/></g></g></g></g>
+</g>
+</svg>
+</svg>`
+
+// Hyperespace : un tunnel d'anneaux qui fonce vers toi et des traînées d'étoiles.
+const HYPERESPACE = `${HEAD}
+<style>
+.bg{fill:#03030b}
+.core{fill:#6a5cff;opacity:.35}
+.ring{fill:none;stroke:#7d8bff;stroke-width:2;transform-box:view-box;transform-origin:800px 500px;animation:warp 12s cubic-bezier(.55,0,1,.45) infinite;opacity:0}
+.r2{animation-delay:-2s}.r3{animation-delay:-4s}.r4{animation-delay:-6s}.r5{animation-delay:-8s}.r6{animation-delay:-10s}
+@keyframes warp{
+0%{transform:scale(.05);opacity:0}
+30%{opacity:.5}
+85%{opacity:.25}
+100%{transform:scale(7);opacity:0}}
+.st{fill:none;stroke:#cfd6ff;stroke-width:1.4;stroke-linecap:round;stroke-dasharray:2 40 70 600;opacity:.45;animation:streak 9s linear infinite}
+.s2{animation-delay:-3s;stroke:#9ef0ff}.s3{animation-delay:-6s;stroke:#ffb3f2}
+@keyframes streak{from{stroke-dashoffset:0}to{stroke-dashoffset:-712}}
+.glow{animation:glow 8s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.25}to{opacity:.45}}
+</style>
+<defs><radialGradient id="c"><stop offset="0" stop-color="#b9b3ff"/><stop offset=".35" stop-color="#5b4dff" stop-opacity=".5"/><stop offset="1" stop-color="#03030b" stop-opacity="0"/></radialGradient></defs>
+<rect class="bg" width="1600" height="1000"/>
+<circle class="glow" cx="800" cy="500" r="260" fill="url(#c)"/>
+<g>
+<path class="st" d="M800 500 L1600 500"/><path class="st s2" d="M800 500 L1600 180"/><path class="st s3" d="M800 500 L1350 -100"/>
+<path class="st" d="M800 500 L920 -100"/><path class="st s2" d="M800 500 L560 -100"/><path class="st s3" d="M800 500 L120 -100"/>
+<path class="st" d="M800 500 L0 220"/><path class="st s2" d="M800 500 L0 520"/><path class="st s3" d="M800 500 L0 860"/>
+<path class="st" d="M800 500 L300 1100"/><path class="st s2" d="M800 500 L720 1100"/><path class="st s3" d="M800 500 L1100 1100"/>
+<path class="st" d="M800 500 L1600 900"/><path class="st s2" d="M800 500 L1600 700"/><path class="st s3" d="M800 500 L1600 330"/>
+<path class="st s2" d="M800 500 L1500 1100"/>
+</g>
+<ellipse class="ring" cx="800" cy="500" rx="160" ry="110"/>
+<ellipse class="ring r2" cx="800" cy="500" rx="160" ry="110"/>
+<ellipse class="ring r3" cx="800" cy="500" rx="160" ry="110"/>
+<ellipse class="ring r4" cx="800" cy="500" rx="160" ry="110"/>
+<ellipse class="ring r5" cx="800" cy="500" rx="160" ry="110"/>
+<ellipse class="ring r6" cx="800" cy="500" rx="160" ry="110"/>
+</svg>`
+
+// Orbite : une étoile ombrée en relief, trois orbites inclinées et des planètes
+// qui passent devant (plus grandes) puis derrière (plus petites, plus pâles).
+const ORBITE = `${HEAD}
+<style>
+.bg{fill:#07050f}
+.star{fill:#ffffff;opacity:.5}
+.tw{animation:tw 7s ease-in-out infinite alternate}
+.t2{animation-delay:-3s}.t3{animation-delay:-5s}
+@keyframes tw{from{opacity:.15}to{opacity:.6}}
+.path{fill:none;stroke-width:1;opacity:.45}
+.o1{stroke:#ffb86b}.o2{stroke:#7fd1ff}.o3{stroke:#c59bff}
+.spin{animation:spin linear infinite}
+.pl{animation:pl linear infinite}
+.a{animation-duration:16s}.b{animation-duration:26s}.c{animation-duration:40s}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pl{
+0%{transform:rotate(0deg) scale(1);opacity:.9}
+25%{transform:rotate(-90deg) scale(1.45);opacity:1}
+50%{transform:rotate(-180deg) scale(1);opacity:.9}
+75%{transform:rotate(-270deg) scale(.6);opacity:.45}
+100%{transform:rotate(-360deg) scale(1);opacity:.9}}
+.halo{animation:halo 10s ease-in-out infinite alternate}
+@keyframes halo{from{opacity:.35}to{opacity:.6}}
+</style>
+<defs>
+<radialGradient id="sun" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff4d6"/><stop offset=".45" stop-color="#ffb347"/><stop offset="1" stop-color="#b8431f"/></radialGradient>
+<radialGradient id="hal"><stop offset="0" stop-color="#ff9a3c" stop-opacity=".6"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+<radialGradient id="p1" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#d9f3ff"/><stop offset="1" stop-color="#2a6ea8"/></radialGradient>
+<radialGradient id="p2" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#ffe0c2"/><stop offset="1" stop-color="#a1452a"/></radialGradient>
+<radialGradient id="p3" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#efe0ff"/><stop offset="1" stop-color="#5b3a99"/></radialGradient>
+</defs>
+<rect class="bg" width="1600" height="1000"/>
+<circle class="star tw" cx="900" cy="120" r="1.4"/><circle class="star tw t2" cx="1300" cy="300" r="1.2"/>
+<circle class="star tw t3" cx="1500" cy="90" r="1.6"/><circle class="star tw" cx="1100" cy="820" r="1.2"/>
+<circle class="star tw t2" cx="700" cy="900" r="1"/><circle class="star tw t3" cx="1450" cy="640" r="1.3"/>
+<circle class="star" cx="1000" cy="460" r="1"/><circle class="star" cx="1220" cy="560" r="1"/>
+<svg x="0" y="0" width="1600" height="1000" viewBox="0 0 520 520" preserveAspectRatio="xMinYMin meet">
+<g transform="translate(190 180)">
+<g transform="rotate(-14) scale(1 .3)"><circle class="path o3" r="170"/></g>
+<g transform="rotate(10) scale(1 .28)"><circle class="path o2" r="120"/></g>
+<g transform="rotate(-24) scale(1 .34)"><circle class="path o1" r="80"/></g>
+<circle class="halo" r="95" fill="url(#hal)"/>
+<circle r="42" fill="url(#sun)"/>
+<g transform="rotate(-24) scale(1 .34)"><g class="spin a"><g transform="translate(80 0)"><g class="pl a"><g transform="scale(1 2.94)"><circle r="7" fill="url(#p2)"/></g></g></g></g></g>
+<g transform="rotate(10) scale(1 .28)"><g class="spin b"><g transform="translate(120 0)"><g class="pl b"><g transform="scale(1 3.57)"><circle r="10" fill="url(#p1)"/></g></g></g></g></g>
+<g transform="rotate(-14) scale(1 .3)"><g class="spin c"><g transform="translate(170 0)"><g class="pl c"><g transform="scale(1 3.33)"><circle r="8" fill="url(#p3)"/></g></g></g></g></g>
+</g>
+</svg>
+</svg>`
+
 export const SCENES: Record<string, { svg: string; alt: string }> = {
+  hologramme: { svg: HOLOGRAMME, alt: 'Un globe holographique en fil de fer qui tourne au-dessus d’un socle lumineux' },
+  hyperespace: { svg: HYPERESPACE, alt: 'Un tunnel d’anneaux lumineux et des traînées d’étoiles qui filent vers l’avant' },
+  orbite: { svg: ORBITE, alt: 'Des planètes en relief qui tournent sur des orbites inclinées autour d’une étoile' },
   ocean: { svg: OCEAN, alt: 'Des vagues qui glissent lentement sous un ciel clair' },
   couchant: { svg: COUCHANT, alt: 'Un soleil couchant et des nuages qui dérivent' },
   foret: { svg: FORET, alt: 'Des collines et des sapins, avec des lucioles qui flottent' },

@@ -46,3 +46,28 @@ test('le fond est dessiné sur desktop', async $ => {
   expect(await ui.find({ type: 'Svg' })).toBeDefined()
   await ui.unmount()
 })
+
+test('les thèmes futuristes se choisissent et se dessinent', async ($, on) => {
+  const sets: unknown[] = []
+  on('command.register', () => ({ value: { command: 'ambiance' } }))
+  on('store.get', () => ({ value: undefined }))
+  on('store.set', () => ({ value: undefined }))
+  on('theme.set', (_, e) => {
+    sets.push(e)
+
+    return { value: { isDrawn: true, requestId: 'r' } }
+  })
+  for (const id of ['hologramme', 'hyperespace', 'orbite']) {
+    const done = await $.command.run({ ...RUN, args: id })
+    expect(done.text).toContain('activée')
+    expect(JSON.stringify(sets.at(-1))).toContain(`"scene":"${id}"`)
+    const ui = await $.ui.mount({
+      plugin: 'mes-themes',
+      surface: 'mobile',
+      component: 'Backdrop',
+      props: { scene: id, plugin: 'mes-themes', glass: false },
+    })
+    expect(await ui.find({ type: 'Svg' })).toBeDefined()
+    await ui.unmount()
+  }
+})
